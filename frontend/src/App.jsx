@@ -5,12 +5,14 @@ function App() {
   const [message, setMessage] = useState("")
   const [messages, setMessages] = useState([])
 
+  const API_URL = import.meta.env.VITE_API_URL
+
   async function sendMessage() {
 
     if (!message) return
 
     const res = await fetch(
-      "http://localhost:8000/support/",
+      `${API_URL}/support/`,
       {
         method: "POST",
         headers: {
@@ -21,6 +23,8 @@ function App() {
         })
       }
     )
+
+    
 
     const data = await res.json()
 
