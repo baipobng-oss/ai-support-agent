@@ -1,18 +1,27 @@
+import os
+
+from dotenv import load_dotenv
+
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 
+load_dotenv()
+
 llm = ChatOpenAI(
-    model="gpt-4.1-mini",
+    api_key=os.getenv("OPENAI_API_KEY"),
+    model="gpt-3.5-turbo",
     temperature=0
 )
 
-SYSTEM_PROMPT = """
-You are an AI customer support agent.
-"""
-
 prompt = ChatPromptTemplate.from_messages([
-    ("system", SYSTEM_PROMPT),
-    ("human", "{input}")
+    (
+        "system",
+        "You are a helpful AI support agent."
+    ),
+    (
+        "human",
+        "{input}"
+    )
 ])
 
 chain = prompt | llm
