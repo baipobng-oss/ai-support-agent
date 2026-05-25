@@ -5,14 +5,9 @@ from app.api.chat import router as chat_router
 
 app = FastAPI()
 
-origins = [
-    "https://baipobng-oss-ai-support-agent.vercel.app",
-    "http://localhost:5173",
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

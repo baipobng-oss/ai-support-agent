@@ -11,10 +11,18 @@ class ChatRequest(BaseModel):
 @router.post("/support/")
 def support_chat(req: ChatRequest):
 
-    response = support_agent(
-        req.message
-    )
+    try:
 
-    return {
-        "response": response
-    }
+        response = support_agent(req.message)
+
+        return {
+            "response": response
+        }
+
+    except Exception as e:
+
+        print("ERROR:", str(e))
+
+        return {
+            "error": str(e)
+        }
